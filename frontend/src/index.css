@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base reset ──────────────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-terminal-bg text-white font-sans;
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-terminal-surface;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-terminal-muted rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-neon-blue/60;
+  }
+}
+
+/* ── Utility components ──────────────────────────────────────────────────── */
+@layer components {
+  .panel {
+    @apply bg-terminal-panel border border-terminal-border rounded-xl shadow-panel;
+  }
+
+  .panel-surface {
+    @apply bg-terminal-surface border border-terminal-border rounded-xl;
+  }
+
+  .btn-primary {
+    @apply px-5 py-2.5 rounded-lg font-mono font-semibold text-sm
+           bg-neon-green/10 text-neon-green border border-neon-green/50
+           hover:bg-neon-green/20 hover:border-neon-green hover:shadow-neon-green
+           active:scale-95 transition-all duration-150 cursor-pointer;
+  }
+
+  .btn-secondary {
+    @apply px-5 py-2.5 rounded-lg font-mono font-semibold text-sm
+           bg-terminal-muted/50 text-gray-300 border border-terminal-border
+           hover:bg-terminal-muted hover:text-white hover:border-gray-500
+           active:scale-95 transition-all duration-150 cursor-pointer;
+  }
+
+  .btn-danger {
+    @apply px-5 py-2.5 rounded-lg font-mono font-semibold text-sm
+           bg-red-500/10 text-red-400 border border-red-500/50
+           hover:bg-red-500/20 hover:border-red-400
+           active:scale-95 transition-all duration-150 cursor-pointer;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full
+           text-xs font-mono font-medium border;
+  }
+
+  .badge-beginner {
+    @apply badge text-neon-green border-neon-green/30 bg-neon-green/10;
+  }
+
+  .badge-intermediate {
+    @apply badge text-neon-yellow border-neon-yellow/30 bg-neon-yellow/10;
+  }
+
+  .badge-advanced {
+    @apply badge text-neon-pink border-neon-pink/30 bg-neon-pink/10;
+  }
+
+  .terminal-text {
+    @apply font-mono text-sm text-neon-green;
+  }
+
+  .scanline {
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 2px,
+      rgba(0, 0, 0, 0.08) 2px,
+      rgba(0, 0, 0, 0.08) 4px
+    );
+    pointer-events: none;
+  }
+
+  .neon-divider {
+    @apply border-t border-terminal-border relative;
+  }
+
+  .neon-divider::after {
+    content: '';
+    @apply absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-blue/40 to-transparent;
+  }
+}
+
+/* ── DnD Kit overrides ───────────────────────────────────────────────────── */
+[data-dnd-overlay] {
+  z-index: 9999;
+}
